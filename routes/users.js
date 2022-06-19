@@ -14,7 +14,7 @@ router.get('/signup', (req, res) => {
     res.render('signup')
 })
 
-router.post('/signup', (req, res) => {
+router.post('/signup', async(req, res) => {
     const { name, email, username, password, password2 } = req.body;
     let errors = [];
 
@@ -28,6 +28,11 @@ router.post('/signup', (req, res) => {
 
     if (password.length < 8) {
         errors.push({ msg: 'Password Should be at least 8 characters' });
+    }
+
+    const usernameExists = await User.findOne({ username })
+    if (usernameExists) {
+        errors.push({ msg: 'Username is already taken!' });
     }
 
     if (errors.length > 0) {
