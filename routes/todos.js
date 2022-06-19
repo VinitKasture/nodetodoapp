@@ -49,14 +49,11 @@ router.get('/update/:id', async(req, res) => {
     const email = req.cookies["email"];
     const id = req.params.id;
     const user = await User.findOne({ email });
-    let todo = user.todos[id]
+    let todo = user.todos[id];
+    const todos = user.todos;
     const todoText = req.query.newtodo;
-    const newTodo = {
-        _id: new Date().toString(),
-        todo: todoText,
-        createdAt: new Date().toString()
-    }
-    await User.findOneAndUpdate({ email }, { todos: newTodo });
+    todo.todo = todoText;
+    await User.findOneAndUpdate({ email }, { todos });
     res.redirect('/dashboard')
 })
 
