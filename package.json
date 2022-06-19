@@ -17,6 +17,10 @@
     "name": "node-chat-app",
     "version": "1.0.0",
     "main": "index.js",
+    "engines": {
+        "node": "12.11.1",
+        "npm": "6.14.8"
+    },
     "devDependencies": {
         "nodemon": "^2.0.16"
     },

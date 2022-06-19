@@ -10,6 +10,8 @@ mongoose.connect(process.env.MONGODB_URL, () => { console.log('Database Connecte
 
 const app = express();
 
+app.set('port', (process.env.PORT || 3000))
+
 // EJS
 app.use(cookieParser())
 app.use(expressLayouts);
@@ -48,4 +50,4 @@ app.use('/users', require('./routes/users'));
 app.use('/dashboard', require('./routes/todos'));
 
 
-app.listen(3000, () => { console.log('Listening'); })
+app.listen(app.get('port'), () => { console.log('Listening....'); })
