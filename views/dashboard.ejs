@@ -1,0 +1,79 @@
+<head>
+    <style>
+        #box {
+            align-items: center;
+        }
+        
+        form,
+        input {
+            width: 100%;
+            max-width: 50rem;
+        }
+    </style>
+</head>
+<div class="header d-flex justify-content-sm-between">
+    <h1>Welcome
+        <%= name %>
+    </h1>
+    <a class="btn btn-primary" href="/users/logout">Logout</a>
+</div>
+<div class="container my-3">
+    <div class="d-flex flex-column justify-content-center" id="box">
+        <form action="/dashboard/addtodo" method="POST">
+            <h1 class="d-flex justify-content-center">Add Todo</h1>
+            <div class="mb-3">
+                <label for="todo" class="form-label"> <b>Add Todo</b></label>
+                <input type="text" class="form-control" id="todo" name="todo" placeholder="Whats Your Plan?" required>
+            </div>
+            <div class="btns">
+                <button type="submit" class="btn btn-outline-dark">Add Todo</button>
+                <a href="/archives" class="btn btn-success">Archives</a>
+                <a href="/chart" class="btn btn-outline-info">Chart</a>
+            </div>
+        </form>
+
+        <input type="hidden" class="form-control my-3" id="search" placeholder="Search Todo">
+    </div>
+
+    <table class="table my-3">
+        <thead>
+            <tr>
+                <th scope="col">Sr. No.</th>
+                <th scope="col">Todo</th>
+                <th scope="col">Date Added</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% todos.forEach(todo => { %>
+                <tr>
+                    <th scope="row">
+                        <%= todos.indexOf(todo) + 1 %>
+                    </th>
+                    <th scope="row">
+                        <%= todo.todo %>
+                    </th>
+                    <th scope="row">
+                        <%= todo.createdAt.slice(0, 25) %>
+                    </th>
+                    <td>
+                        <a href="/edit/<%= todos.indexOf(todo) %>" class="btn btn-warning">Edit</a>
+                        <a href="/delete/<%= todos.indexOf(todo) %>" class="btn btn-outline-danger">Delete</a>
+                    </td>
+                </tr>
+                <% }) %>
+
+        </tbody>
+    </table>
+</div>
+<script>
+    const searchInput = document.getElementById("search");
+
+    searchInput.addEventListener("input", (e) => {
+        let value = e.target.value;
+        todos.forEach(todo => {
+            const isVisible = todo.todo.includes(value);
+            todo.classList.toggle("hide", !isVisible)
+        });
+    })
+</script>

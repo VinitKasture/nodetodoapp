@@ -1,0 +1,10 @@
+<body>
+    <form action="/update/<%= todos.indexOf(todo) %>" method="get">
+        <h1 class="d-flex justify-content-center">Add Todo</h1>
+        <div class="mb-3">
+            <label for="todo" class="form-label"> <b>Add Todo</b></label>
+            <input type="text" class="form-control" name="newtodo" placeholder="Whats Your Plan?" value="<%= todo.todo %> " required>
+        </div>
+        <button type="submit" class="btn btn-outline-dark">Update Todo</button>
+    </form>
+</body>
