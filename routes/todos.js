@@ -9,7 +9,6 @@ router.post('/addtodo', async(req, res) => {
     const email = req.cookies["email"];
     const todo = req.body.todo;
     const newTodo = {
-        _id: new Date().toString(),
         todo: todo,
         createdAt: new Date().toString()
     }
