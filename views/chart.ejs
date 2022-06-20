@@ -6,36 +6,44 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Todo Chart</title>
+    <style>
+        canvas {
+            max-width: 100vw;
+            max-height: 100vh;
+        }
+    </style>
 </head>
 
 <body>
     <div>
         <canvas id="myChart"></canvas>
     </div>
-    <div class="archive"></div>
+    <input type="hidden" value="<%= todoData[0] %> " id="incomplete">
+    <input type="hidden" value="<%= todoData[1] %> " id="archive">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.27.2/axios.min.js" integrity="sha512-odNmoc1XJy5x1TMVMdC7EMs3IVdItLPlCeL5vSUPN2llYKMJ2eByTTAIiiuqLg+GdNr9hF6z81p27DArRFKT7A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </body>
 <script>
-    const incomplete = document.querySelector('incomplete');
-    console.log(incomplete)
+    const incomplete = document.querySelector('#incomplete').value;
+    const archive = document.querySelector('#archive').value;
+    console.log(incomplete, archive)
     const labels = [
         'Completed',
-        'InComplete'
+        'InComplete',
     ];
 
     const data = {
         labels: labels,
         datasets: [{
-            label: 'My First dataset',
-            backgroundColor: 'rgb(255, 99, 132)',
-            borderColor: 'rgb(255, 99, 132)',
-            data: [5, 3],
+            label: 'Todo Chart',
+            backgroundColor: ['rgba(154, 205, 50, 0.2)', 'rgba(255, 99, 132, 0.2)'],
+            borderColor: ['rgb(154, 205, 50)', 'rgb(255, 99, 132)'],
+            data: [incomplete, archive],
         }]
     };
 
     const config = {
-        type: 'bar',
+        type: 'polarArea',
         data: data,
         options: {}
     };
